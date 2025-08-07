@@ -6,7 +6,6 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3000;
 
 // 🔒 SECURITY VULNERABILITY: Insecure session configuration
 app.use(session({
@@ -22,10 +21,10 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static('.'));
+app.use(express.static(path.join(__dirname, '..')));
 
 // 🔒 SECURITY VULNERABILITY: Insecure JSON file-based storage
-const usersFile = 'users.json';
+const usersFile = path.join(__dirname, '..', 'users.json');
 let users = [];
 
 // Initialize users data
@@ -165,14 +164,4 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
 
-// Handle Vercel serverless environment
-if (process.env.NODE_ENV === 'production') {
-    // For Vercel, export the app
-    module.exports = app;
-} else {
-    // For local development, start the server
-    app.listen(PORT, () => {
-        console.log(`TaskFlow application running on http://localhost:${PORT}`);
-        console.log('Server started successfully.');
-    });
-} 
+module.exports = app; 
