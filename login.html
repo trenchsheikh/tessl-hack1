@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="login.html" class="nav-link active">Sign In</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="settings.html" class="nav-link">Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="auth-section">
+            <h1>Sign In to TaskFlow</h1>
+            
+            <!-- 🔒 SECURITY VULNERABILITY: Login form with insecure handling -->
+            <form id="loginForm" class="form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <!-- 🐛 BUG: Submit button that sometimes doesn't work -->
+                <button type="submit" class="btn btn-primary" id="loginBtn">Sign In</button>
+                
+                <!-- 🐛 BUG: Broken validation - accepts empty fields -->
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                </div>
+            </form>
+            
+            <!-- 🔒 SECURITY VULNERABILITY: Direct DOM injection without sanitization -->
+            <div id="loginMessage"></div>
+            
+            <p>Don't have an account? <a href="signup.html">Create Account</a></p>
+        </section>
+
+        <!-- 🔒 SECURITY VULNERABILITY: Debug information exposed -->
+        <section class="debug-info">
+            <h3>System Information</h3>
+            <div id="debugInfo">
+                <p>Session ID: <span id="sessionId">null</span></p>
+                <p>Last Login: <span id="lastLogin">Never</span></p>
+                <p>Failed Attempts: <span id="failedAttempts">0</span></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 🔒 SECURITY VULNERABILITY: Insecure session management
+        let sessionData = {
+            userId: null,
+            isLoggedIn: false,
+            token: null
+        };
+
+        // 🐛 BUG: Broken login validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 🐛 BUG: No proper validation - accepts empty fields
+            if (!username || !password) {
+                // 🐛 BUG: Sometimes shows error, sometimes doesn't
+                const random = Math.random();
+                if (random > 0.3) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+            }
+            
+            // 🔒 SECURITY VULNERABILITY: Direct DOM injection without sanitization
+            const messageDiv = document.getElementById('loginMessage');
+            messageDiv.innerHTML = `<p>Attempting login for user: ${username}</p>`;
+            
+            // 🔒 SECURITY VULNERABILITY: Insecure password handling
+            if (password === 'admin123' || password === 'password') {
+                sessionData.userId = username;
+                sessionData.isLoggedIn = true;
+                sessionData.token = 'insecure-token-' + Date.now();
+                
+                // 🐛 BUG: Broken redirect - sometimes loops back
+                const random = Math.random();
+                if (random > 0.2) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // 🐛 BUG: Redirect loop
+                    window.location.href = 'login.html';
+                }
+            } else {
+                // 🐛 BUG: Inconsistent error handling
+                const random = Math.random();
+                if (random > 0.5) {
+                    alert('Invalid credentials');
+                } else {
+                    messageDiv.innerHTML = '<p style="color: red;">Login failed</p>';
+                }
+            }
+        });
+
+        // 🐛 BUG: Submit button that randomly doesn't work
+        document.getElementById('loginBtn').addEventListener('click', function(e) {
+            const random = Math.random();
+            if (random < 0.1) {
+                e.preventDefault();
+                // 🐛 BUG: Button does nothing sometimes
+                console.log('Button clicked but nothing happens');
+                return false;
+            }
+        });
+
+        // 🔒 SECURITY VULNERABILITY: Exposed debug information
+        document.getElementById('sessionId').textContent = sessionData.token || 'null';
+        document.getElementById('lastLogin').textContent = new Date().toLocaleString();
+        document.getElementById('failedAttempts').textContent = Math.floor(Math.random() * 5);
+    </script>
+</body>
+</html> 

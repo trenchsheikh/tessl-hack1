@@ -1,0 +1,383 @@
+/* 🐛 BUG: CSS with broken layouts and accessibility issues */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    /* 🐛 BUG: Missing proper color contrast */
+}
+
+/* 🐛 BUG: Broken navbar layout */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 🐛 BUG: Missing position property causing layout issues */
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    /* 🐛 BUG: Missing gap property causing cramped layout */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    /* 🐛 BUG: Missing hover state */
+}
+
+.nav-link.active {
+    background-color: #555;
+    /* 🐛 BUG: Poor contrast for active state */
+}
+
+/* 🐛 BUG: Container with broken responsive design */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    /* 🐛 BUG: Missing responsive breakpoints */
+}
+
+/* 🐛 BUG: Hero section with misaligned content */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+    /* 🐛 BUG: Missing proper spacing */
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    /* 🐛 BUG: Missing color contrast */
+    color: #333;
+}
+
+/* 🐛 BUG: Button styles with broken alignment */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0.5rem;
+    /* 🐛 BUG: Missing transition effects */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* 🐛 BUG: Button group with broken alignment */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    /* 🐛 BUG: Missing proper alignment */
+}
+
+/* 🐛 BUG: Feature grid with broken layout */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    /* 🐛 BUG: Missing responsive design */
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* 🐛 BUG: Missing hover effects */
+}
+
+/* 🐛 BUG: Form styles with broken layout */
+.form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    /* 🐛 BUG: Missing proper label styling */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    /* 🐛 BUG: Missing color contrast */
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    /* 🐛 BUG: Missing focus states */
+}
+
+/* 🐛 BUG: Modal with broken positioning and z-index issues */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    /* 🐛 BUG: Missing proper backdrop handling */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    /* 🐛 BUG: Missing proper positioning */
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    /* 🐛 BUG: Missing hover effects */
+}
+
+/* 🐛 BUG: Dashboard specific styles */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* 🐛 BUG: Missing hover effects */
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+    /* 🐛 BUG: Missing proper alignment */
+}
+
+/* 🐛 BUG: Auth section styles */
+.auth-section {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.debug-info {
+    background: #f8f9fa;
+    padding: 1rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+    /* 🔒 SECURITY VULNERABILITY: Debug info should be hidden */
+}
+
+/* 🐛 BUG: Error section styles */
+.error-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.trap-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.trap-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+/* 🐛 BUG: Search section styles */
+.search-section {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 🐛 BUG: Performance test styles */
+.performance-test {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 🐛 BUG: Performance issues - heavy animations */
+@keyframes brokenAnimation {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(100px); }
+    100% { transform: translateX(0); }
+}
+
+.performance-test-element {
+    animation: brokenAnimation 0.1s infinite;
+    /* 🐛 BUG: Infinite animation causing performance issues */
+}
+
+/* 🐛 BUG: Broken responsive design */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        /* 🐛 BUG: Missing proper mobile navigation */
+    }
+    
+    .button-group {
+        flex-direction: column;
+        /* 🐛 BUG: Buttons stack vertically on mobile */
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        /* 🐛 BUG: Modal too wide on mobile */
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        /* 🐛 BUG: Single column on mobile */
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        /* 🐛 BUG: Single column on mobile */
+    }
+}
+
+/* 🐛 BUG: Hidden elements that should be visible */
+.hidden {
+    display: none !important;
+    /* 🐛 BUG: Important declaration causing issues */
+}
+
+/* 🐛 BUG: Broken color contrast */
+.text-muted {
+    color: #6c757d;
+    /* 🐛 BUG: Poor contrast ratio */
+}
+
+/* 🐛 BUG: Missing hover states */
+.btn:hover {
+    /* 🐛 BUG: No hover effects defined */
+}
+
+.nav-link:hover {
+    /* 🐛 BUG: No hover effects defined */
+}
+
+/* 🐛 BUG: Accessibility issues */
+input:focus,
+select:focus,
+button:focus {
+    /* 🐛 BUG: Missing focus indicators */
+    outline: none;
+}
+
+/* 🐛 BUG: Missing ARIA labels */
+.btn {
+    /* 🐛 BUG: Missing aria-label attributes */
+}
+
+/* 🐛 BUG: Broken form validation styles */
+.form-group input:invalid {
+    /* 🐛 BUG: No invalid state styling */
+}
+
+.form-group input:valid {
+    /* 🐛 BUG: No valid state styling */
+}
+
+/* 🐛 BUG: Missing loading states */
+.loading {
+    /* 🐛 BUG: No loading animation defined */
+}
+
+/* 🐛 BUG: Broken print styles */
+@media print {
+    .navbar,
+    .btn,
+    .modal {
+        display: none;
+        /* 🐛 BUG: Everything hidden on print */
+    }
+} 

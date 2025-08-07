@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Project Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 🐛 BUG: Navigation with broken links and dead ends -->
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="login.html" class="nav-link">Login</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="settings.html" class="nav-link">Settings</a></li>
+            <li><a href="broken-page.html" class="nav-link">Reports</a></li>
+            <li><a href="trap.html" class="nav-link">Analytics</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Streamline Your Project Management</h1>
+            <p>Organize tasks, track progress, and collaborate with your team efficiently.</p>
+            
+            <!-- 🐛 BUG: Misaligned buttons and broken layout -->
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showAlert('Welcome to TaskFlow!')">Get Started</button>
+                <button class="btn btn-secondary" onclick="brokenFunction()">View Demo</button>
+                <button class="btn btn-danger" onclick="crashApp()">Create Project</button>
+                <button class="btn btn-warning" onclick="infiniteLoop()">Team Chat</button>
+                <button class="btn btn-info" onclick="openBrokenModal()">Help</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>User Management</h3>
+                    <p>Secure login and user authentication system</p>
+                    <a href="login.html" class="btn btn-primary">Sign In</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Project Dashboard</h3>
+                    <p>Real-time project tracking and analytics</p>
+                    <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>System Settings</h3>
+                    <p>Configure your workspace preferences</p>
+                    <a href="settings.html" class="btn btn-primary">Settings</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Global Search</h3>
+                    <p>Find projects, tasks, and team members quickly</p>
+                    <button class="btn btn-primary" onclick="showSearchForm()">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🔒 SECURITY VULNERABILITY: XSS vulnerable search form -->
+        <section id="searchSection" class="search-section" style="display: none;">
+            <h2>Global Search</h2>
+            <form id="searchForm" class="form">
+                <div class="form-group">
+                    <label for="searchQuery">Search Projects & Tasks:</label>
+                    <input type="text" id="searchQuery" name="searchQuery" placeholder="Enter project name, task, or team member...">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <div id="searchResults"></div>
+        </section>
+
+        <!-- 🐛 BUG: Performance test section -->
+        <section class="performance-test">
+            <h2>System Status</h2>
+            <button class="btn btn-warning" onclick="performanceTest()">Check Performance</button>
+            <div id="performanceResults"></div>
+        </section>
+    </main>
+
+    <!-- 🐛 BUG: Broken modal that doesn't close properly -->
+    <div id="brokenModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Help & Support</h2>
+            <p>Need assistance with TaskFlow?</p>
+            <ul>
+                <li>Getting started guide</li>
+                <li>Project management tips</li>
+                <li>Team collaboration features</li>
+                <li>Contact support team</li>
+            </ul>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

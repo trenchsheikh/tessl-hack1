@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="login.html" class="nav-link">Sign In</a></li>
+            <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+            <li><a href="settings.html" class="nav-link">Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="dashboard-header">
+            <h1>Project Dashboard</h1>
+            <p>Welcome back, <span id="userName">User</span>!</p>
+        </section>
+
+        <!-- 🐛 BUG: Dashboard with broken data loading -->
+        <section class="dashboard-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Project Statistics</h3>
+                    <div id="userStats">
+                        <p>Loading...</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="loadUserStats()">Refresh Stats</button>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Recent Activity</h3>
+                    <div id="recentActivity">
+                        <p>Loading...</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="loadRecentActivity()">Load Activity</button>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>System Status</h3>
+                    <div id="systemStatus">
+                        <p>Loading...</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="checkSystemStatus()">Check Status</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🐛 BUG: Feature that sometimes works, sometimes fails -->
+        <section class="feature-section">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <button class="btn btn-success" onclick="saveData()">Save Data</button>
+                <button class="btn btn-warning" onclick="exportData()">Export Data</button>
+                <button class="btn btn-info" onclick="generateReport()">Generate Report</button>
+                <button class="btn btn-danger" onclick="deleteData()">Delete Data</button>
+            </div>
+            <div id="actionResult"></div>
+        </section>
+
+        <!-- 🔒 SECURITY VULNERABILITY: Admin panel accessible without proper auth -->
+        <section class="admin-section">
+            <h2>System Administration</h2>
+            <div id="adminContent">
+                <p>System management tools</p>
+                <button class="btn btn-danger" onclick="deleteAllUsers()">Clear All Data</button>
+                <button class="btn btn-info" onclick="showUserList()">View Users</button>
+                <button class="btn btn-warning" onclick="resetSystem()">Reset System</button>
+            </div>
+        </section>
+
+        <!-- 🐛 BUG: Performance issue - heavy data processing -->
+        <section class="data-processing">
+            <h2>Data Processing</h2>
+            <button class="btn btn-warning" onclick="processLargeData()">Process Large Dataset</button>
+            <div id="processingResults"></div>
+        </section>
+    </main>
+
+    <script>
+        // 🐛 BUG: Broken data loading functions
+        function loadUserStats() {
+            const statsDiv = document.getElementById('userStats');
+            const random = Math.random();
+            
+            if (random > 0.3) {
+                statsDiv.innerHTML = `
+                    <p>Total Users: 1,234</p>
+                    <p>Active Sessions: 56</p>
+                    <p>System Load: 78%</p>
+                `;
+            } else {
+                // 🐛 BUG: Sometimes fails to load
+                statsDiv.innerHTML = '<p style="color: red;">Failed to load statistics</p>';
+            }
+        }
+
+        function loadRecentActivity() {
+            const activityDiv = document.getElementById('recentActivity');
+            const random = Math.random();
+            
+            if (random > 0.4) {
+                activityDiv.innerHTML = `
+                    <ul>
+                        <li>User login - 2 minutes ago</li>
+                        <li>Data export - 5 minutes ago</li>
+                        <li>Report generated - 10 minutes ago</li>
+                    </ul>
+                `;
+            } else {
+                // 🐛 BUG: Inconsistent data loading
+                activityDiv.innerHTML = '<p>No recent activity</p>';
+            }
+        }
+
+        function checkSystemStatus() {
+            const statusDiv = document.getElementById('systemStatus');
+            const random = Math.random();
+            
+            if (random > 0.2) {
+                statusDiv.innerHTML = '<p style="color: green;">System Online</p>';
+            } else {
+                statusDiv.innerHTML = '<p style="color: red;">System Offline</p>';
+            }
+        }
+
+        // 🐛 BUG: Feature that sometimes works, sometimes fails
+        function saveData() {
+            const resultDiv = document.getElementById('actionResult');
+            const random = Math.random();
+            
+            if (random > 0.6) {
+                resultDiv.innerHTML = '<p style="color: green;">Data saved successfully!</p>';
+            } else {
+                // 🐛 BUG: Fake success message without actually saving
+                resultDiv.innerHTML = '<p style="color: green;">Data saved successfully!</p>';
+                console.log('Fake save - data not actually saved');
+            }
+        }
+
+        function exportData() {
+            const resultDiv = document.getElementById('actionResult');
+            const random = Math.random();
+            
+            if (random > 0.5) {
+                resultDiv.innerHTML = '<p style="color: green;">Data exported successfully!</p>';
+            } else {
+                resultDiv.innerHTML = '<p style="color: red;">Export failed</p>';
+            }
+        }
+
+        function generateReport() {
+            const resultDiv = document.getElementById('actionResult');
+            const random = Math.random();
+            
+            if (random > 0.4) {
+                resultDiv.innerHTML = '<p style="color: green;">Report generated!</p>';
+            } else {
+                resultDiv.innerHTML = '<p style="color: red;">Report generation failed</p>';
+            }
+        }
+
+        function deleteData() {
+            const resultDiv = document.getElementById('actionResult');
+            const random = Math.random();
+            
+            if (random > 0.7) {
+                resultDiv.innerHTML = '<p style="color: green;">Data deleted successfully!</p>';
+            } else {
+                resultDiv.innerHTML = '<p style="color: red;">Delete failed</p>';
+            }
+        }
+
+        // 🔒 SECURITY VULNERABILITY: Admin functions without proper auth
+        function deleteAllUsers() {
+            // 🔒 SECURITY VULNERABILITY: No authentication check
+            alert('All users deleted! (This should require admin authentication)');
+        }
+
+        function showUserList() {
+            // 🔒 SECURITY VULNERABILITY: No authentication check
+            const adminContent = document.getElementById('adminContent');
+            adminContent.innerHTML = `
+                <h3>All Users (Admin Only)</h3>
+                <ul>
+                    <li>admin - Administrator</li>
+                    <li>user1 - Regular User</li>
+                    <li>user2 - Regular User</li>
+                    <li>test - Test User</li>
+                </ul>
+                <button class="btn btn-danger" onclick="deleteAllUsers()">Delete All Users</button>
+            `;
+        }
+
+        function resetSystem() {
+            // 🔒 SECURITY VULNERABILITY: No authentication check
+            alert('System reset! (This should require admin authentication)');
+        }
+
+        // 🐛 BUG: Performance issue - heavy data processing
+        function processLargeData() {
+            const resultsDiv = document.getElementById('processingResults');
+            resultsDiv.innerHTML = '<p>Processing large dataset...</p>';
+            
+            // 🐛 BUG: Blocking operation that lags the browser
+            let result = 0;
+            for (let i = 0; i < 1000000; i++) {
+                result += Math.sqrt(i);
+            }
+            
+            resultsDiv.innerHTML = `<p>Processing complete! Result: ${result}</p>`;
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🐛 BUG: Sometimes fails to initialize
+            const random = Math.random();
+            if (random > 0.1) {
+                document.getElementById('userName').textContent = 'Admin User';
+                loadUserStats();
+                loadRecentActivity();
+                checkSystemStatus();
+            } else {
+                // 🐛 BUG: Silent initialization failure
+                console.error('Dashboard initialization failed');
+            }
+        });
+    </script>
+</body>
+</html> 

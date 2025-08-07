@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="login.html" class="nav-link">Sign In</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="settings.html" class="nav-link active">Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- 🐛 BUG: Settings page with 404 error -->
+        <section class="error-section">
+            <h1>404 - Page Not Found</h1>
+            <p>The settings page you're looking for doesn't exist.</p>
+            <p>Please try again later or contact support.</p>
+            
+            <!-- 🐛 BUG: Broken back button that leads to trap -->
+            <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+            <button class="btn btn-secondary" onclick="goHome()">Go Home</button>
+        </section>
+
+        <!-- 🐛 BUG: Hidden settings form that doesn't work -->
+        <section class="settings-section" style="display: none;">
+            <h2>Settings</h2>
+            <form id="settingsForm" class="form">
+                <div class="form-group">
+                    <label for="theme">Theme:</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notifications">Notifications:</label>
+                    <input type="checkbox" id="notifications" name="notifications">
+                </div>
+                
+                <div class="form-group">
+                    <label for="language">Language:</label>
+                    <select id="language" name="language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Settings</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // 🐛 BUG: Broken back button that leads to trap
+        function goBack() {
+            // 🐛 BUG: Back button leads to trap page
+            window.location.href = 'trap.html';
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // 🐛 BUG: Settings form that doesn't work
+        document.getElementById('settingsForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 🐛 BUG: Form submission does nothing
+            console.log('Settings form submitted but nothing happens');
+            alert('Settings saved! (Actually not saved)');
+        });
+
+        // 🐛 BUG: Page sometimes shows settings, sometimes shows 404
+        document.addEventListener('DOMContentLoaded', function() {
+            const random = Math.random();
+            if (random < 0.1) {
+                // 🐛 BUG: Sometimes shows settings instead of 404
+                document.querySelector('.error-section').style.display = 'none';
+                document.querySelector('.settings-section').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 

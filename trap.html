@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="login.html" class="nav-link">Sign In</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="settings.html" class="nav-link">Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="trap-section">
+            <h1>Analytics Dashboard</h1>
+            <p>Loading project analytics and performance metrics...</p>
+            <p>Please wait while we gather your data.</p>
+            
+            <!-- 🐛 BUG: Buttons that lead back to the same page -->
+            <div class="trap-buttons">
+                <button class="btn btn-primary" onclick="goBack()">Refresh Data</button>
+                <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+                <button class="btn btn-warning" onclick="goToSettings()">Settings</button>
+                <button class="btn btn-info" onclick="goToDashboard()">Dashboard</button>
+            </div>
+            
+            <p>Loading analytics data, please wait...</p>
+        </section>
+
+        <!-- 🐛 BUG: Hidden escape route that sometimes works -->
+        <section class="escape-section" style="display: none;">
+            <h2>Data Ready</h2>
+            <p>Analytics data has been processed successfully!</p>
+            <button class="btn btn-success" onclick="escape()">View Results</button>
+        </section>
+    </main>
+
+    <script>
+        // 🐛 BUG: All navigation functions lead back to trap
+        function goBack() {
+            // 🐛 BUG: Back button leads back to trap
+            window.location.href = 'trap.html';
+        }
+
+        function goHome() {
+            // 🐛 BUG: Home button leads back to trap
+            window.location.href = 'trap.html';
+        }
+
+        function goToSettings() {
+            // 🐛 BUG: Settings button leads back to trap
+            window.location.href = 'trap.html';
+        }
+
+        function goToDashboard() {
+            // 🐛 BUG: Dashboard button leads back to trap
+            window.location.href = 'trap.html';
+        }
+
+        function escape() {
+            // 🐛 BUG: Escape function sometimes works, sometimes doesn't
+            const random = Math.random();
+            if (random > 0.8) {
+                window.location.href = 'index.html';
+            } else {
+                window.location.href = 'trap.html';
+            }
+        }
+
+        // 🐛 BUG: Page sometimes shows escape route
+        document.addEventListener('DOMContentLoaded', function() {
+            const random = Math.random();
+            if (random < 0.05) {
+                // 🐛 BUG: Sometimes shows escape route
+                document.querySelector('.escape-section').style.display = 'block';
+            }
+        });
+
+        // 🐛 BUG: Auto-redirect after 5 seconds
+        setTimeout(function() {
+            // 🐛 BUG: Automatic redirect back to trap
+            window.location.href = 'trap.html';
+        }, 5000);
+    </script>
+</body>
+</html> 
