@@ -21,29 +21,9 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 // Serve static files
 app.use(express.static(path.join(__dirname, '..')));
-
-// Serve HTML files directly
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'login.html'));
-});
-
-app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'dashboard.html'));
-});
-
-app.get('/settings', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'settings.html'));
-});
-
-app.get('/analytics', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'trap.html'));
-});
 
 // 🔒 SECURITY VULNERABILITY: Insecure JSON file-based storage
 const usersFile = path.join(__dirname, '..', 'users.json');
@@ -66,7 +46,7 @@ try {
     console.error('Error loading users:', error);
 }
 
-// 🔒 SECURITY VULNERABILITY: Insecure password storage
+// API Routes
 app.post('/api/register', (req, res) => {
     const { username, email, password } = req.body;
     
@@ -88,7 +68,6 @@ app.post('/api/register', (req, res) => {
     }
 });
 
-// 🔒 SECURITY VULNERABILITY: Insecure authentication
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     
@@ -105,14 +84,12 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-// 🔒 SECURITY VULNERABILITY: No authentication required
 app.get('/api/users', (req, res) => {
     // 🔒 SECURITY VULNERABILITY: No auth check
     const safeUsers = users.map(u => ({ id: u.id, username: u.username, email: u.email }));
     res.json({ users: safeUsers });
 });
 
-// 🔒 SECURITY VULNERABILITY: XSS vulnerable endpoint
 app.post('/api/search', (req, res) => {
     const { query } = req.body;
     
@@ -123,7 +100,6 @@ app.post('/api/search', (req, res) => {
     res.json({ results });
 });
 
-// 🐛 BUG: Broken endpoint that sometimes works
 app.get('/api/status', (req, res) => {
     const random = Math.random();
     
@@ -135,7 +111,6 @@ app.get('/api/status', (req, res) => {
     }
 });
 
-// 🐛 BUG: Performance issue - heavy computation
 app.get('/api/heavy-computation', (req, res) => {
     // 🐛 BUG: Blocking operation
     let result = 0;
@@ -145,7 +120,6 @@ app.get('/api/heavy-computation', (req, res) => {
     res.json({ result });
 });
 
-// 🔒 SECURITY VULNERABILITY: Admin bypass
 app.get('/api/admin', (req, res) => {
     // 🔒 SECURITY VULNERABILITY: Weak admin check
     if (req.session.isAdmin || req.query.admin === 'true') {
@@ -158,7 +132,6 @@ app.get('/api/admin', (req, res) => {
     }
 });
 
-// 🐛 BUG: Memory leak - storing data without cleanup
 const dataStore = {};
 
 app.post('/api/store-data', (req, res) => {
@@ -173,16 +146,35 @@ app.post('/api/store-data', (req, res) => {
     res.json({ success: true });
 });
 
+// Serve HTML pages
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'login.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'dashboard.html'));
+});
+
+app.get('/settings', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'settings.html'));
+});
+
+app.get('/analytics', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'trap.html'));
+});
+
 // 🐛 BUG: Broken error handling
 app.use((err, req, res, next) => {
-    // 🐛 BUG: Error handling doesn't work properly
     console.error('Error:', err);
     res.status(500).json({ error: 'Internal server error' });
 });
 
 // 🐛 BUG: Missing 404 handler
 app.use((req, res) => {
-    // 🐛 BUG: No proper 404 handling
     res.status(404).json({ error: 'Not found' });
 });
 
